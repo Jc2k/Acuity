@@ -18,7 +18,7 @@ body { margin: 0; padding: 0; }
 #toolbar a { color: blue; background: none; }
 #toolbar a:hover { background: none; }
 #tools,#searchterm,#logfiles { margin: 0 10px; }
-#toolbar #header { height: 20px; padding: 3px 5px; width: 100%; overflow:hidden; background: #333; border-bottom: 2px solid #222; color: #eee; }
+#toolbar #header { height: 20px; padding: 3px 0; width: 100%; overflow:hidden; background: #333; border-bottom: 2px solid #222; color: #eee; }
 #toolbar #header h1 { font-size: 16px; line-height: 20px; }
 #toolbar #header a { text-decoration: none; color: #eee; }
 #toolbar #header a:hover { text-decoration: none; color: #fff;}
