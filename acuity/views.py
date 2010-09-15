@@ -12,7 +12,7 @@ def dir_order(d):
    
    for f in LIST_AT_TOP:
       if f in s:
-         s.insert(0, s.pop(s.index(f)))
+         s.insert(0, f)
    return s
 
 def dirlist(request):
