@@ -50,7 +50,8 @@ if(jQuery) (function($){
 				
 				function showTree(c, t) {
 					$(c).addClass('wait');
-					$(".jqueryFileTree.start").remove();
+					$(".jqueryFileTree.start").remove();					            
+					$.ajaxSetup({scriptCharset: "utf-8", contentType: "application/json; charset=utf-8"});
 					$.post(o.script, { dir: t }, function(data) {
 						$(c).find('.start').html('');
 						$(c).removeClass('wait').append(data);
