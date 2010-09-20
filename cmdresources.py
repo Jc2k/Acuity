@@ -42,14 +42,15 @@ class ShellResource(resource.Resource):
         filename = cgi.escape(request.args["file"][0])
         term = cgi.escape(request.args["term"][0])
         shell = ShellHTTP(request)
-
-        if cmd == 'tail':
-            process = reactor.spawnProcess(shell, "tail", ["tail", "-f", filename], {})
-        if cmd == 'grep':
-	    if filename and os.path.splitext(filename)[1].lower() in ['.gz']:
-		process = reactor.spawnProcess(shell, "zgrep", ["zgrep", term, filename], {})
-	    else:
-                process = reactor.spawnProcess(shell, "grep", ["grep", term, filename], {})
+	
+	if os.path.exists(os.path.realpath(filename)):
+	    if cmd == 'tail':
+		process = reactor.spawnProcess(shell, "tail", ["tail", "-f", filename], {})
+	    if cmd == 'grep':
+		if filename and os.path.splitext(filename)[1].lower() in ['.gz']:
+		    process = reactor.spawnProcess(shell, "zgrep", ["zgrep", term, filename], {})
+		else:
+		    process = reactor.spawnProcess(shell, "grep", ["grep", term, filename], {})
 
         request.notifyFinish().addErrback(self._responseFailed, process)
         return NOT_DONE_YET
