@@ -1,0 +1,10 @@
+bin
+develop-eggs
+eggs
+parts
+*.egg-info
+*.pyc
+twistd.log
+twistd.pid
+.installed.cfg
+dropin.cache

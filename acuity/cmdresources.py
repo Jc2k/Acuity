@@ -6,6 +6,8 @@ import re
 import os
 import cgi
 
+from jinja2 import Environment, PackageLoader
+
 class ShellHTTP(protocol.ProcessProtocol):
     def __init__(self, request):
         self.request = request
@@ -55,12 +57,15 @@ class ShellResource(resource.Resource):
         request.notifyFinish().addErrback(self._responseFailed, process)
         return NOT_DONE_YET
 
-class Root(resource.Resource):
-    def __init__(self, wsgi_resource):
-        resource.Resource.__init__(self)
-        self.wsgi_resource = wsgi_resource
+class Jinja(resource.Resource):
 
-    def getChild(self, path, request):
-        path0 = request.prepath.pop(0)
-        request.postpath.insert(0, path0)
-        return self.wsgi_resource
+    def render_template(self, template, **kwargs):
+        env = Environment(loader=PackageLoader("acuity", "templates"))
+        template = env.get_template(template)
+        return template.render(kwargs).encode("UTF-8")
+
+class Root(Jinja):
+
+    def render_GET(self, request):
+        return self.render_template("index.html")
+
