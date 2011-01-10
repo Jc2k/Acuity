@@ -1,2 +1,10 @@
+To install:
+$ python bootstrap.py
+$ ./bin/buildout
+
 To start the Twisted server, execute:
-$ twistd -ny server.py
+$ ./bin/acuity start
+
+To stop the Twisted server:
+$ ./bin/acuity stop
+
