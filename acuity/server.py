@@ -21,6 +21,7 @@ def makeService(config):
     # Servce Django media files off of /media:
     staticrsrc = static.File(os.path.join(os.path.dirname(__file__), "media"))
     root.putChild("static", staticrsrc)
+    root.putChild("media", staticrsrc)
 
     root.putChild("browse", views.DirList())
 
